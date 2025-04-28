@@ -19,9 +19,9 @@ Edit/Delete Notes: Modify or delete previously submitted activities.
 @For Students:
 Login/Logout: Secure student login to submit activities.
 
-Create Notes: Student can't create notice as misuse can happen.
+Create Notes: Students can't create notice as misuse can happen.
 
-View My Notes: View personal warning in a personal list.
+View My Notes: View personal warnings in a personal list.
 
 
 
@@ -64,33 +64,33 @@ MongoDB account and a cluster (free tier is fine)
 
 
 #-> Steps:
-1.Clone the repository:
+1. Clone the repository:
 
 git clone https://github.com/ayush-5158/e-register.git
 cd e-register
 
 
-2.Set up a virtual environment (optional but recommended):
+2. Set up a virtual environment (optional but recommended):
 
 python -m venv venv
 On macOS/Linux: source venv/bin/activate  
 On Windows: venv\Scripts\activate
 
 
-3.Install dependencies:
+3. Install dependencies:
 pip install -r requirements.txt
 
 
-4.Set up MongoDB:
+4. Set up MongoDB:
 
 Create a free MongoDB cluster at MongoDB Atlas.
 
 Get your connection string and replace the MONGO_URI in your FastAPI configuration file.
 
-5.Run the application:
+5. Run the application:
 
 
-uvicorn index:app --reload
+uvicorn index: app --reload
 The app will be live on http://localhost:8000.
 
 ------------------------------------------------------------------------------------------------------------------
@@ -99,11 +99,11 @@ The app will be live on http://localhost:8000.
 
 @Login Page:
 
-Use the login form to either sign in as a student or admin.
+Use the login form to sign in as either a student or admin.
 
 @Dashboard:
 
-Once logged in, users will be redirected to the dashboard where they can create, view, edit, or delete notes.
+Once logged in, users are redirected to the dashboard, where they can create, view, edit, or delete notes.
 
 Admin users can also post updates and view all notes submitted by students.
 
@@ -115,17 +115,14 @@ Click the dropdown in the top right corner to access the user profile, change yo
 
 #-> File Structure
 
-e-register/
-│
-├── app/
-│   ├── main.py                 # FastAPI app and routing
-│   ├── models.py               # MongoDB models
-│   ├── templates/              # Jinja2 HTML templates
-│   ├── static/                 # Static files (CSS, JS, images)
-│   ├── routes/                 # Route files for specific functionality (e.g., note handling)
-│
-├── requirements.txt            # Python dependencies
-├── README.md                  # Project documentation
+
+main.py -> FastAPI app and routing
+models.py -> MongoDB models
+templates -> Jinja2Template
+static -> image(no need)
+routes -> Route files for specific functionality (e.g., note handling)
+requirements.txt -> python dependencies
+readme.md -> project documentation and explanation
 
 ------------------------------------------------------------------------------------------------------------------
 
