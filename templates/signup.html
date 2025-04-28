@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - eRegister</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url("/static/background.jpg"); /* Add your image URL here */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes gradientFlow {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .signup-box {
+      background-color: rgba(135, 175, 193, 0.9); /* White background with transparency */
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 450px;
+      animation: fadeIn 1s ease;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: 700;
+      color: #333;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-group i {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #f40d0d;
+    }
+
+    .form-control {
+      padding-left: 40px;
+      height: 45px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-signup {
+      background-color: #667eea;
+      color: white;
+      width: 100%;
+      padding: 12px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-signup:hover {
+      background-color: #556cd6;
+      transform: translateY(-2px);
+    }
+
+    .text-center a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .text-center a:hover {
+      text-decoration: underline;
+    }
+
+    .small-text {
+      font-size: 0.8rem;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      min-width: 250px;
+      z-index: 9999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 4s ease;
+    }
+
+    .toast.hide {
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="signup-box">
+    <h2>Create Account</h2>
+    <form method="POST" action="/signup" id="signupForm">
+      <div class="form-group">
+        <i class="fas fa-id-badge"></i>
+        <input type="text" name="uid" class="form-control" placeholder="Student UID" required />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-user"></i>
+        <input type="text" name="name" class="form-control" placeholder="Full Name" required />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" name="email" class="form-control" placeholder="Email" required />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="password" class="form-control" placeholder="Password (min 6 characters)" required />
+      </div>
+      <button type="submit" class="btn btn-signup">Sign Up</button>
+    </form>
+    <div class="text-center mt-3">
+      Already have an account? <a href="/login">Login</a>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast hide" id="toast">
+    <div class="toast-body">
+      <strong id="toast-message"></strong>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Show toast notification
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toast-message');
+      toastMessage.innerText = message;
+      toast.classList.remove('hide');
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+        toast.classList.add('hide');
+      }, 3000); // Hide toast after 3 seconds
+    }
+
+    // Check if there is an error message from the server
+    {% if error %}
+      showToast("{{ error }}");
+    {% endif %}
+
+    {% if success %}
+      showToast("{{success}} UID : {{uid}} ");
+    {% endif %}
+  </script>
+</body>
+
+</html>
